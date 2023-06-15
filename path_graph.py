@@ -56,8 +56,8 @@ def main():
         fig, ax = plt.subplots(figsize=(8,8))
         ax.plot(p_list, k_opt_list, marker='s')
         for i in range(len(p_list)):
-            ax.annotate(round(min_cond_entropy_list[i],2), (p_list[i], k_opt_list[i]), \
-                xytext=(5,3),textcoords = "offset pixels")
+            ax.annotate((int(k_opt_list[i]), round(min_cond_entropy_list[i],2)), (p_list[i], k_opt_list[i]), \
+                xytext=(3,20),textcoords = "offset pixels", size=5)
         ax.set_xlabel('Transmission rate p')
         ax.set_ylabel('Optimal node k to query')
         ax.set_title('Path graph analysis')
