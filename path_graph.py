@@ -39,18 +39,25 @@ def optimal_k_cond_entropy(p, N):
             min_cond_entropy = cond_entropy_k
         k+=1
     
-    return k_opt     
+    return k_opt, min_cond_entropy 
     
 
 def main():
     N_list = [5, 10, 20, 50, 100, 500]
     for N in N_list:
         k_opt_list = []
+        min_cond_entropy_list = []
         p_list = np.arange(0.05, 1, 0.05).tolist()
         for p in p_list:
-            k_opt_list.append(optimal_k_cond_entropy(p, N))
+            k_opt, min_cond_entropy = optimal_k_cond_entropy(p, N)
+            k_opt_list.append(k_opt)
+            min_cond_entropy_list.append(min_cond_entropy)
+            
         fig, ax = plt.subplots(figsize=(8,8))
         ax.plot(p_list, k_opt_list, marker='s')
+        for i in range(len(p_list)):
+            ax.annotate(min_cond_entropy_list[i], (p_list[i], k_opt_list[i]), \
+                xytext=(5,3),textcoords = "offset pixels")
         ax.set_xlabel('Transmission rate p')
         ax.set_ylabel('Optimal node k to query')
         ax.set_title('Path graph analysis')
