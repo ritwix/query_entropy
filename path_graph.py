@@ -43,18 +43,18 @@ def optimal_k_cond_entropy(p, N):
     
 
 def main():
-    N = 100
-    k_opt_list = []
-    p_list = np.arange(0.05, 1, 0.05).tolist()
-    for p in p_list:
-        k_opt_list.append(optimal_k_cond_entropy(p, N))
-        # pdb.set_trace()
-    fig, ax = plt.subplots(figsize=(8,8))
-    ax.plot(p_list, k_opt_list, marker='s')
-    ax.set_xlabel('Transmission rate p')
-    ax.set_ylabel('Optimal node k to query')
-    ax.set_title('Path graph analysis')
-    fig.savefig(f'path_graph_k_vs_p_N{N}.png', dpi=300, bbox_inches='tight')
+    N_list = [5, 10, 20, 50, 100, 500]
+    for N in N_list:
+        k_opt_list = []
+        p_list = np.arange(0.05, 1, 0.05).tolist()
+        for p in p_list:
+            k_opt_list.append(optimal_k_cond_entropy(p, N))
+        fig, ax = plt.subplots(figsize=(8,8))
+        ax.plot(p_list, k_opt_list, marker='s')
+        ax.set_xlabel('Transmission rate p')
+        ax.set_ylabel('Optimal node k to query')
+        ax.set_title('Path graph analysis')
+        fig.savefig(f'path_graph_k_vs_p_N{N}.png', dpi=300, bbox_inches='tight')
 
 if __name__=="__main__":
     main()
